@@ -1,9 +1,9 @@
 import Conversation from '../../models/conversation';
 export const FETCH_FRIEND_LIST = 'FETCH_FRIEND_LIST';
 
-const fetchFriendList = ()=> {
+const fetchFriendList = (queryString)=> {
     return async dispatch =>{
-        const response = await fetch('http://ec2-3-135-17-82.us-east-2.compute.amazonaws.com:8080/friendList?doctorInfoId=1', //
+        const response = await fetch('http://ec2-3-135-17-82.us-east-2.compute.amazonaws.com:8080/doctorapp/friendList?doctorInfoId='+queryString, //
         {
             method: 'GET',
         })
@@ -17,8 +17,7 @@ const fetchFriendList = ()=> {
                         resData[key].conversation_id,
                         resData[key].patient_user_id,
                         resData[key].doctor_info_id,
-                        resData[key].patient_user_socket_id,
-                        resData[key].doctor_user_socket_id,
+                        resData[key].room_id,
                         resData[key].conversation_content,
                         resData[key].patientUser,
                     )

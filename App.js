@@ -6,11 +6,13 @@ import FriendList from "./src/pages/FriendList/FriendList";
 import { Provider } from "react-redux";
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
-import GetFriendListReducer from './src/store/reducers/FriendList'
+import GetFriendListReducer from './src/store/reducers/FriendList';
+import LoginReducer from './src/store/reducers/Login';
 import FunctionsNavigator from './src/navigation/functionNavigator';
 
 const rootReducer = combineReducers({
   FriendList: GetFriendListReducer,
+  Login: LoginReducer
 });
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
@@ -18,7 +20,6 @@ const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 export default function App() {
   return (
     <Provider store={store}>
-        
         <FunctionsNavigator />
     </Provider>
   );
