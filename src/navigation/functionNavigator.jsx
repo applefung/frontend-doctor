@@ -10,6 +10,7 @@ import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import VideoLobby from '../pages/VideoConference/VideoLobby';
 import VideoConference from '../pages/VideoConference/VideoConference';
+import VideoConferenceOneToOne from '../pages/VideoConference/VideoConferennceOneToOne'
 
 const FunctionsNavigator = createStackNavigator({
   Home: Home,
@@ -56,7 +57,8 @@ const LoginNavigator = createStackNavigator({
 const VideoStackNavigator = createStackNavigator(
   {
       VideoLobby:VideoLobby,
-      VideoConference:VideoConference
+      VideoConferenceOneToOne:VideoConferenceOneToOne
+      //VideoConference:VideoConference
       
   }
   ,{

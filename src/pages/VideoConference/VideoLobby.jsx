@@ -59,7 +59,7 @@ const VideoLobby = (props) => {
 
       const startVideo=(roomId)=>{
         console.log(roomId)
-        props.navigation.navigate({routeName: "VideoConference", params: { id: roomId}});
+        props.navigation.navigate({routeName: "VideoConferenceOneToOne", params: { id: roomId}});
     }
 
 
