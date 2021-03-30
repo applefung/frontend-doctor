@@ -12,6 +12,7 @@ export default (state = initalState ,action) =>{
     switch(action.type)
     {
         case VERIFY_LOGIN:
+            console.log("login",action.doctorUserId)
             return{
                 ...state,
                 Jwt: action.jwt,

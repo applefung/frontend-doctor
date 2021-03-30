@@ -8,6 +8,8 @@ import FriendList from "../pages/FriendList/FriendList";
 import Chat from "../pages/Chat/Chat";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
+import VideoLobby from '../pages/VideoConference/VideoLobby';
+import VideoConference from '../pages/VideoConference/VideoConference';
 
 const FunctionsNavigator = createStackNavigator({
   Home: Home,
@@ -51,10 +53,27 @@ const LoginNavigator = createStackNavigator({
   }
 )
 
+const VideoStackNavigator = createStackNavigator(
+  {
+      VideoLobby:VideoLobby,
+      VideoConference:VideoConference
+      
+  }
+  ,{
+      mode:'modal',
+     
+      
+  }
+);
+
+
+
 const UserTabNavigator = createBottomTabNavigator(
   {
       Home:FunctionsNavigator,
-      Message: MessageNavigator
+      Message: MessageNavigator,
+      VideoLobby:VideoStackNavigator
+      
   }
   ,{
       mode:'modal',
