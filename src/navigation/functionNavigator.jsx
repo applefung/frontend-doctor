@@ -14,13 +14,16 @@ import VideoConferenceOneToOne from '../pages/VideoConference/VideoConferennceOn
 
 const FunctionsNavigator = createStackNavigator({
   Home: Home,
+  FriendList:FriendList,
+  VideoLobby:VideoLobby
+
 },                          
 {
   mode:'modal',
   defaultNavigationOptions: {
-      headerStyle:{
-          // backgroundColor: Colors.primaryColor
-      }
+      
+       
+      
       
   }
 });
@@ -86,7 +89,7 @@ const UserTabNavigator = createBottomTabNavigator(
 
 const DrawerNavigator = createDrawerNavigator(
   {
-      Home: UserTabNavigator,
+      Home: FunctionsNavigator,
       Login :{
         screen:Login,
         navigationOptions:{

@@ -1,3 +1,6 @@
+
+
+
 export const FETCH_VIDEO_LIST = "FETCH_VIDEO_LIST";
 
 
@@ -9,7 +12,7 @@ export const fetchVideoList=(dotor_id)=>{
      })
      .then (response=>response.json())
      .then(resData=>{
-         //console.log(resData);
+         
          let temp =[]
          const today = new Date();
          let formatedMonth=  ("0" + (today.getMonth()+1)).slice(-2);

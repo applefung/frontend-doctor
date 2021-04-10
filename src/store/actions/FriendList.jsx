@@ -2,6 +2,10 @@ import Conversation from '../../models/conversation';
 export const FETCH_FRIEND_LIST = 'FETCH_FRIEND_LIST';
 
 const fetchFriendList = (queryString)=> {
+
+    
+
+
     return async dispatch =>{
         const response = await fetch('http://ec2-3-135-17-82.us-east-2.compute.amazonaws.com:8080/doctorapp/friendList?doctorInfoId='+queryString, //
         {

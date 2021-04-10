@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useState, useRef } from 'react';
 import {
     SafeAreaView,
     Button,
@@ -14,8 +14,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as videoActions from '../../store/actions/FetchVideoList'
 import { useEffect } from 'react';
 import {withNavigationFocus} from 'react-navigation';
+import * as Animatable from 'react-native-animatable'
 
 const VideoLobby = (props) => {
+    const ref = useRef();
     const dispatch= useDispatch();
     const [isLoading, setIsLoading]=useState(false);
     const [selectedId, setSelectedId] = useState(null);
@@ -36,9 +38,17 @@ const VideoLobby = (props) => {
     }
 
     useEffect(()=>{
+        ref.current.slideInRight();
+        if(props.currentPage==2){
+          fetchVideoList();
+          console.log("geerere")
+        }
         
-            fetchVideoList();
-    },[])
+        return()=>ref.current.slideOutRight();
+        
+
+        
+    },[dispatch,props.currentPage])
 
     const renderItem = ({ item }) => {
         const backgroundColor = item.id === selectedId ? "#6e3b6e" : "#f9c2ff";
@@ -64,7 +74,7 @@ const VideoLobby = (props) => {
 
 
     return ( 
-        <SafeAreaView>
+        <Animatable.View ref={ref} style={{flex:1}}>
            {isDoctor?
            <View><Text>No Booking</Text></View>:
            
@@ -76,7 +86,7 @@ const VideoLobby = (props) => {
             />
            }
             
-        </SafeAreaView>
+        </Animatable.View>
 
      );
 }
