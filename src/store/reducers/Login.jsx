@@ -1,4 +1,5 @@
-import {VERIFY_LOGIN} from '../actions/Login';
+import {VERIFY_LOGIN,AUTHENTICATE} from '../actions/Login';
+
 
 const initalState ={
     Jwt: "",
@@ -11,6 +12,12 @@ const initalState ={
 export default (state = initalState ,action) =>{
     switch(action.type)
     {
+        case AUTHENTICATE:
+            return{
+                jwt: action.jwt,
+                userId: action.userId,
+                patientUserId:action.patientUserId
+            };
         case VERIFY_LOGIN:
             console.log("login",action.doctorUserId)
             return{
@@ -21,6 +28,7 @@ export default (state = initalState ,action) =>{
                 ExpiryDate: action.expiryDate,
                 DoctorInfoId: action.doctorInfoId
             };
+        default: return state;
     }
     
     return state;

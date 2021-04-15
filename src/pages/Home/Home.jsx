@@ -30,9 +30,9 @@ const Home = (props)=> {
     const paging =()=>{
         console.log(currentPage)
         switch(currentPage){
-            case 0 : return <DoctorCard currentPage={currentPage}/>
-            case 1 : return <FriendList  currentPage={currentPage}/>
-            case 2 : return <VideoLobby currentPage={currentPage}/>
+            case 0 : return <DoctorCard navigation={props.navigation} currentPage={currentPage}/>
+            case 1 : return <FriendList  navigation={props.navigation} currentPage={currentPage}/>
+            case 2 : return <VideoLobby  navigation={props.navigation} currentPage={currentPage}/>
             
             default : return null
         }

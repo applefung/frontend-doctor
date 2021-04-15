@@ -1,7 +1,8 @@
 import DoctorUser from '../../models/doctorUser';
 import jwt_decode from 'jwt-decode';
+import { AsyncStorage } from "react-native";
 export const VERIFY_LOGIN = 'VERIFY_LOGIN';
-
+export const AUTHENTICATE='AUTHENTICATE';
 const verifyLogin = (userObject)=> {
     return async dispatch =>{
         const response = await fetch('http://ec2-3-135-17-82.us-east-2.compute.amazonaws.com:8080/doctorapp/authentication', //
@@ -33,6 +34,7 @@ const verifyLogin = (userObject)=> {
                 doctorInfoId: jwtDecode.userInfoId,
                 expiryDate: jwtDecode.exp
             });
+            saveDataToStorage(jwt,decodedforLogin.userEmail,decodedforLogin.userId)
         })
         .catch(
             (error) => console.error(error)
@@ -40,4 +42,19 @@ const verifyLogin = (userObject)=> {
     };
 }
 
-export {verifyLogin};
+const authenticate = (jwt,userId,patientUserId)=>{
+    return dispatch =>{
+        dispatch({type:AUTHENTICATE, jwt:jwt, userId:userId,patientUserId:patientUserId})
+    }
+}
+
+
+const saveDataToStorage =(jwt, userId,patientUserId)=>{
+    AsyncStorage.setItem('userData', JSON.stringify({
+        jwt:jwt,
+        userId:userId,
+        patientUserId:patientUserId
+    }))
+}
+
+export {verifyLogin,authenticate};

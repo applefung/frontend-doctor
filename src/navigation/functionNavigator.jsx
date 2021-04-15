@@ -11,11 +11,13 @@ import Login from "../pages/Login/Login";
 import VideoLobby from '../pages/VideoConference/VideoLobby';
 import VideoConference from '../pages/VideoConference/VideoConference';
 import VideoConferenceOneToOne from '../pages/VideoConference/VideoConferennceOneToOne'
+import Startup from '../pages/startup'
 
 const FunctionsNavigator = createStackNavigator({
   Home: Home,
   FriendList:FriendList,
-  VideoLobby:VideoLobby
+  VideoLobby:VideoLobby,
+  Chat:Chat
 
 },                          
 {
@@ -71,19 +73,14 @@ const VideoStackNavigator = createStackNavigator(
   }
 );
 
-
-
 const UserTabNavigator = createBottomTabNavigator(
   {
       Home:FunctionsNavigator,
       Message: MessageNavigator,
       VideoLobby:VideoStackNavigator
-      
   }
   ,{
       mode:'modal',
-     
-      
   }
 );
 
@@ -147,8 +144,9 @@ const drawerStyles = StyleSheet.create({
 });
 
 const MainNavigator = createSwitchNavigator({
+  // Startup: Startup,
   Main: DrawerNavigator,
-  Login: LoginNavigator
+  Login: Login
 })  
 
 
