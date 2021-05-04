@@ -9,17 +9,18 @@ const StartUpPage = (props) => {
     useEffect(()=>{
         const tryLogin = async ()=>{
             const userData = await AsyncStorage.getItem('userData');
-            console.log(userData)
+            console.log("userData",userData)
             if(userData===null){
                 props.navigation.navigate('Login')
-                console.log("adasdas")
+                
                 return;
             }
             const transformData = JSON.parse(userData);
-            const {jwt,userId,patientUserId} = transformData;
-        
+            const {jwt,userEmail,doctorUserId} = transformData;
+        //console.log("ddasdasdaddadasdasd",doctorUserId)
+        dispatch(authActions.authenticate(jwt,userEmail,doctorUserId));
         props.navigation.navigate('Main')
-        dispatch(authActions.authenticate(jwt,userId,patientUserId));
+        
         
         }
         

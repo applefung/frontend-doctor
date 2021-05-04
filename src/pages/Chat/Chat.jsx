@@ -23,6 +23,7 @@ const Chat = (props) => {
 
     useEffect(() => {
       dispatch(friendListActions.fetchFriendList(doctorInfoId));
+      console.log(conversationAccordingId.conversation_content.message)
     }, [dispatch]);
 
 
@@ -40,6 +41,7 @@ const Chat = (props) => {
 
         socket.current.on('connect', () => {
             const createUser = {"_id": "doctor"+doctorInfoId};
+          
             setUser(createUser)
             socket.current.emit('userJoined',  {"message": messages[0], "doctorInfoId": doctorInfoId, "patientUserId":patientUserId, "roomId": roomId, "userType": "doctor"});
             socket.current.on('userJoined', (userId) => {

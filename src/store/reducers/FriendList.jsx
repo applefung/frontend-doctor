@@ -1,4 +1,4 @@
-import {FETCH_FRIEND_LIST} from '../actions/FriendList';
+import {FETCH_FRIEND_LIST,SIGN_OUT} from '../actions/FriendList';
 
 const initalState ={
     GetFriendList:[],
@@ -12,6 +12,12 @@ export default (state = initalState ,action) =>{
                 ...state,
                 GetFriendList: action.friendList
             };
+        case SIGN_OUT:
+            return{
+                ...state,
+                GetFriendList:[]
+            }
+        default: return state
     }
     
     return state;

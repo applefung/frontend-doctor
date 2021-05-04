@@ -1,10 +1,18 @@
 
 
-
+export const SIGN_OUT="SIGN_OUT";
 export const FETCH_VIDEO_LIST = "FETCH_VIDEO_LIST";
 
 
-export const fetchVideoList=(dotor_id)=>{
+
+ const signOut = ()=>{
+    return dispatch =>{
+        dispatch({type:SIGN_OUT})
+    }
+}
+
+
+ const fetchVideoList=(dotor_id)=>{
     return async dispatch =>{
         const response = await fetch( "http://ec2-3-135-17-82.us-east-2.compute.amazonaws.com:8080/videoConferencing?doctor_user_id="+ dotor_id,{
          method:"GET",
@@ -23,12 +31,24 @@ export const fetchVideoList=(dotor_id)=>{
          currentHours = ("0" + currentHours).slice(-2);
          currentMinutes = ("0" + currentMinutes).slice(-2);
 
+         console.log(resData)
          for(let i =0; i<resData.length;i++){
              if(resData[i].booking.booking_date===formatDate)
              {
-                 if(currentHours <= parseInt(resData[i].booking.booking_time))
-                    temp.push(resData[i])
+                
+                 if(currentHours <= parseInt(resData[i].booking.booking_time)){
+                     let data = {...resData[i],check:false}
+                     temp.push(data)
+                 }
+                 else{
+                     
+                    let data = {...resData[i],check:true}
+                    temp.push(data)
+                 }
+                    
+                
              }
+                
          }
          
         temp = temp.sort(function (a, b) {
@@ -36,7 +56,7 @@ export const fetchVideoList=(dotor_id)=>{
            });
 
 
-         console.log(temp)
+         console.log("asdjandajd",temp)
 
 
 
@@ -48,3 +68,5 @@ export const fetchVideoList=(dotor_id)=>{
      })
     }
 }
+
+export {fetchVideoList,signOut};

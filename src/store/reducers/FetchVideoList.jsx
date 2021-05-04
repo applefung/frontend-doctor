@@ -1,4 +1,4 @@
-import {FETCH_VIDEO_LIST} from '../actions/FetchVideoList'
+import {FETCH_VIDEO_LIST,SIGN_OUT} from '../actions/FetchVideoList'
 
 const initalState={
     videoList:[]
@@ -11,6 +11,11 @@ export default (state = initalState,action)=>{
             return{
                 ...state,
                 videoList:action.videoList
+            }
+        case SIGN_OUT:
+            return{
+                ...state,
+                videoList:[]
             }
         default:
             return state;

@@ -11,6 +11,7 @@ import LoginReducer from './src/store/reducers/Login';
 import FetchVideoListReducer from './src/store/reducers/FetchVideoList'
 import FunctionsNavigator from './src/navigation/functionNavigator';
 import * as Font from 'expo-font';
+import { Provider as PaperProvider } from 'react-native-paper';
 
 const rootReducer = combineReducers({
   FriendList: GetFriendListReducer,
@@ -43,7 +44,9 @@ export default function App() {
 
   return (
     <Provider store={store}>
+      <PaperProvider>
         <FunctionsNavigator />
+      </PaperProvider>
     </Provider>
   );
 }

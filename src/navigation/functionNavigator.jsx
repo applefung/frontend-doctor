@@ -12,12 +12,19 @@ import VideoLobby from '../pages/VideoConference/VideoLobby';
 import VideoConference from '../pages/VideoConference/VideoConference';
 import VideoConferenceOneToOne from '../pages/VideoConference/VideoConferennceOneToOne'
 import Startup from '../pages/startup'
+import Register from '../pages/Login/Register'
+import { useDispatch, useSelector } from 'react-redux';
+import * as loginActions from '../store/actions/Login'
+import * as loginActions1 from '../store/actions/FriendList'
+import * as loginActions2 from '../store/actions/FetchVideoList'
+
 
 const FunctionsNavigator = createStackNavigator({
   Home: Home,
-  FriendList:FriendList,
-  VideoLobby:VideoLobby,
-  Chat:Chat
+  // FriendList:FriendList,
+  // VideoLobby:VideoLobby,
+  Chat:Chat,
+  VideoConferenceOneToOne:VideoConferenceOneToOne
 
 },                          
 {
@@ -30,34 +37,34 @@ const FunctionsNavigator = createStackNavigator({
   }
 });
 
-const MessageNavigator = createStackNavigator({
-  FriendList: FriendList,
-  Chat: Chat,
-},                          
-{
-  mode:'modal',
-  defaultNavigationOptions: {
-      headerStyle:{
-          // backgroundColor: Colors.primaryColor
-      }
+// const MessageNavigator = createStackNavigator({
+//   FriendList: FriendList,
+//   Chat: Chat,
+// },                          
+// {
+//   mode:'modal',
+//   defaultNavigationOptions: {
+//       headerStyle:{
+//           // backgroundColor: Colors.primaryColor
+//       }
       
-  }
-});
+//   }
+// });
 
-const LoginNavigator = createStackNavigator({
-  Login: Login,
+// const LoginNavigator = createStackNavigator({
+//   Login: Login,
   
-  },
-  {
-      mode:'modal',
-      defaultNavigationOptions: {
-          // headerStyle:{
-          //     backgroundColor: Colors.primaryColor
-          // }
+//   },
+//   {
+//       mode:'modal',
+//       defaultNavigationOptions: {
+//           // headerStyle:{
+//           //     backgroundColor: Colors.primaryColor
+//           // }
           
-      }
-  }
-)
+//       }
+//   }
+// )
 
 const VideoStackNavigator = createStackNavigator(
   {
@@ -73,28 +80,28 @@ const VideoStackNavigator = createStackNavigator(
   }
 );
 
-const UserTabNavigator = createBottomTabNavigator(
-  {
-      Home:FunctionsNavigator,
-      Message: MessageNavigator,
-      VideoLobby:VideoStackNavigator
-  }
-  ,{
-      mode:'modal',
-  }
-);
+// const UserTabNavigator = createBottomTabNavigator(
+//   {
+//       Home:FunctionsNavigator,
+//       Message: MessageNavigator,
+//       VideoLobby:VideoStackNavigator
+//   }
+//   ,{
+//       mode:'modal',
+//   }
+// );
 
 const DrawerNavigator = createDrawerNavigator(
   {
-      Home: FunctionsNavigator,
+      Main: FunctionsNavigator,
       Login :{
         screen:Login,
         navigationOptions:{
             drawerLabel: ()=>null
 
-        }
-    },
-      FriendList: FriendList
+        },
+      Logout:MainNavigator,
+    }
   },
   {
     // initialRouteName: 'Home',
@@ -102,6 +109,8 @@ const DrawerNavigator = createDrawerNavigator(
       activeTintColor: '#333333',
     },
     contentComponent:   (props)  =>{
+      const dispatch = useDispatch();
+      const userInfo = useSelector (state=>state.Login);
       return (
         <View style={{flex:1, paddingTop:20}}>
             <View style={{flex:1}} forceInset={{top: 'always', horizonta:'never'}}>
@@ -117,12 +126,21 @@ const DrawerNavigator = createDrawerNavigator(
                           overflow: 'hidden'}}>
                           <Image style={{width:'80%',height:'80%'}} source={{uri:'https://www.shareicon.net/data/512x512/2016/06/25/786536_people_512x512.png'}}></Image>
                       </View>
-                          <Button
-                          title="Login"
-                          onPress={()=>{ props.navigation.navigate('Login')}}
-                          />
+              
+                        <Button
+                        title="Logout"
+                        onPress={()=>{
+                          dispatch(loginActions.signOut());
+                          
+                          dispatch(loginActions2.signOut());
+                          dispatch(loginActions1.signOut());
+                          props.navigation.closeDrawer();
+                          props.navigation.navigate('Login');}}
+                        />
+                      
+                          
                   </View>
-                  
+  
               </View>
               <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
                   <View style={{ borderBottomColor: '#bdbdbd', borderBottomWidth: 1, width: '85%' }} />
@@ -144,9 +162,10 @@ const drawerStyles = StyleSheet.create({
 });
 
 const MainNavigator = createSwitchNavigator({
-  // Startup: Startup,
+  Startup: Startup,
   Main: DrawerNavigator,
-  Login: Login
+  Login: Login,
+  Register: Register
 })  
 
 
